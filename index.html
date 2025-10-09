@@ -57,6 +57,7 @@ header .logo{
   box-shadow:var(--shadow);
   padding:20px;
   margin:16px 0;
+  text-align:center;
 }
 h2{text-align:center;color:var(--brand);}
 footer{
@@ -74,26 +75,50 @@ main{padding-bottom:80px;}
   max-width:380px;
   margin:60px auto;
   background:#fff;
-  padding:30px;
+  padding:40px 32px;
   border-radius:var(--radius);
   box-shadow:var(--shadow);
   text-align:center;
 }
-#auth-container h2{color:var(--brand);margin-bottom:20px;}
-.input-box{position:relative;margin:14px 0;}
-.input-box i{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--brand);}
-.input-box input{
-  width:100%;padding:12px 12px 12px 38px;
-  border:1.5px solid #ccc;border-radius:var(--radius);
-  font-size:15px;
+#auth-container h2{color:var(--brand);margin-bottom:24px;font-size:22px;}
+.input-box {
+  position: relative;
+  margin: 16px 0;
+  width: 100%;
 }
-.input-box input:focus{border-color:var(--brand);outline:none;}
-.toggle-link{
-  color:var(--brand);text-decoration:underline;cursor:pointer;
-  font-size:14px;margin-top:10px;display:block;
+
+.input-box i {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--brand);
+  font-size: 16px;
 }
-.coin-icon{font-size:46px;color:var(--brand);margin-bottom:10px;}
+
+.input-box input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px 12px 42px;
+  border: 1.6px solid #ccc;
+  border-radius: var(--radius);
+  font-size: 15px;
+  background: #fff;
+}
+
+.input-box input:focus {
+  border-color: var(--brand);
+  outline: none;
+  box-shadow: 0 0 4px rgba(13,110,253,0.2);
+}
+
+.coin-icon{
+  font-size:46px;
+  color:var(--brand);
+  margin-bottom:10px;
+}
 @media(max-width:480px){
+  #auth-container{margin:40px 20px;padding:30px 20px;}
   header{flex-direction:column;gap:10px;}
   .btn{padding:10px 16px;}
 }
@@ -151,30 +176,27 @@ main{padding-bottom:80px;}
   <div class="container">
     <main>
       <section id="tasks">
-        <h2>Earn by Doing Tasks</h2>
+        <h2>Earn Money from Tasks</h2>
 
         <div class="card">
-          <h3>Watch Ad & Earn $0.20</h3>
-          <button class="btn" onclick="earn('watch')">Watch Ad</button>
+          <h3>🎬 Watch Video & Earn $0.25</h3>
+          <button class="btn" onclick="earn('video')">Watch & Earn</button>
         </div>
 
         <div class="card">
-          <h3>Install App & Earn $0.30</h3>
+          <h3>📱 Install App & Earn $0.30</h3>
           <button class="btn" onclick="earn('install')">Install & Earn</button>
         </div>
 
         <div class="card">
-          <h3>Complete Offer & Earn $0.40</h3>
-          <button class="btn" onclick="earn('offer')">Do Offer</button>
+          <h3>🧾 Complete Survey & Earn $0.50</h3>
+          <button class="btn" onclick="earn('survey')">Start Survey</button>
         </div>
-      </section>
 
-      <!-- Ad section -->
-      <section id="videos" style="display:none;">
-        <h2>Watch Ads</h2>
         <div class="card">
-          <iframe src="https://www.effectivegatecpm.com/ckvswpeje?key=cee4b35c20ff7be9eb8311e72a0b929c"
-            style="width:100%;height:220px;border:none;border-radius:10px;"></iframe>
+          <h3>🎁 Daily Login Bonus ($0.10)</h3>
+          <button class="btn" onclick="dailyBonus()">Claim Bonus</button>
+          <p id="bonus-status" style="margin-top:8px;font-size:14px;color:gray;"></p>
         </div>
       </section>
 
@@ -183,7 +205,6 @@ main{padding-bottom:80px;}
         <div class="card">
           <p><strong>Name:</strong> <span id="profile-name">Demo User</span></p>
           <p><strong>Email:</strong> <span id="profile-email">user@example.com</span></p>
-          <p><strong>Notifications:</strong> <input type="checkbox" checked></p>
         </div>
       </section>
     </main>
@@ -191,14 +212,13 @@ main{padding-bottom:80px;}
 
   <footer>
     <div class="item active" onclick="showSection('tasks', this)"><i class="fas fa-tasks"></i>Tasks</div>
-    <div class="item" onclick="showSection('videos', this)"><i class="fas fa-video"></i>Videos</div>
     <div class="item" onclick="showSection('profile', this)"><i class="fas fa-user-cog"></i>Profile</div>
   </footer>
 </div>
 
 <script>
 let balance = parseFloat(localStorage.getItem("balance")) || 0;
-const adLink = "https://www.effectivegatecpm.com/ckvswpeje?key=cee4b35c20ff7be9eb8311e72a0b929c";
+const mobideaLink = "https://www.passingcars.wiki/?sl=6013222-e9b7e&pub_click_id={clickId}&site={custom1}&pub_sub_id={custom2}";
 
 function updateBalance(){
   document.getElementById("balance").textContent = balance.toFixed(2);
@@ -206,14 +226,26 @@ function updateBalance(){
 }
 
 function earn(type){
-  window.open(adLink, "_blank");
-  let amount = 0;
-  if(type === "watch") amount = 0.20;
-  else if(type === "install") amount = 0.30;
-  else if(type === "offer") amount = 0.40;
-  balance += amount;
+  window.open(mobideaLink, "_blank");
+  if(type === "video") balance += 0.25;
+  if(type === "install") balance += 0.30;
+  if(type === "survey") balance += 0.50;
   updateBalance();
-  alert(`You earned $${amount.toFixed(2)}!`);
+  alert("You earned from " + type + " task!");
+}
+
+function dailyBonus(){
+  const today = new Date().toDateString();
+  const lastBonus = localStorage.getItem("lastBonus");
+  if(lastBonus === today){
+    document.getElementById("bonus-status").textContent = "Bonus already claimed today!";
+  }else{
+    balance += 0.10;
+    updateBalance();
+    localStorage.setItem("lastBonus", today);
+    document.getElementById("bonus-status").textContent = "Bonus claimed successfully!";
+    alert("You earned $0.10 daily bonus!");
+  }
 }
 
 function showSection(id, el){
@@ -233,7 +265,6 @@ function withdraw(){
   }
 }
 
-// Login + Signup
 document.getElementById("show-signup").onclick = ()=>{
   document.getElementById("login-form").style.display="none";
   document.getElementById("signup-form").style.display="block";
@@ -261,17 +292,18 @@ document.getElementById("signup-form").onsubmit = (e)=>{
   document.getElementById("login-form").style.display="block";
 };
 
-// Load profile
 window.onload = ()=>{
   const name = localStorage.getItem("username") || "Demo User";
   const email = localStorage.getItem("useremail") || "user@example.com";
   document.getElementById("profile-name").textContent = name;
   document.getElementById("profile-email").textContent = email;
+  updateBalance();
+  const today = new Date().toDateString();
+  const lastBonus = localStorage.getItem("lastBonus");
+  if(lastBonus === today){
+    document.getElementById("bonus-status").textContent = "Bonus already claimed today!";
+  }
 };
 </script>
-
-<!-- Adsterra Script -->
-<script type="text/javascript" src="https://www.effectivegatecpm.com/ckvswpeje?key=cee4b35c20ff7be9eb8311e72a0b929c"></script>
-
 </body>
 </html>
