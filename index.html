@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>smart earning platform</title>
+<title>Smart Earning Platform</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
@@ -52,7 +52,6 @@
     margin: auto;
   }
 
-  /* === FORM STYLES === */
   .form-box {
     max-width: 400px;
     margin: 70px auto;
@@ -123,7 +122,6 @@
 
   .hidden { display: none; }
 
-  /* === MAIN APP === */
   .card {
     background: white;
     padding: 20px;
@@ -172,7 +170,6 @@
     animation: fadeIn 0.5s ease;
   }
 
-  /* === NAVIGATION === */
   nav {
     background: white;
     display: flex;
@@ -201,13 +198,11 @@
     color: var(--secondary);
   }
 
-  /* === ANIMATIONS === */
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* === RESPONSIVE === */
   @media (max-width: 768px) {
     header h1 { font-size: 1.5rem; }
     .form-box { margin: 40px 10px; padding: 25px 20px; }
@@ -237,7 +232,7 @@
   <input type="text" id="loginUsername" placeholder="Enter username" required>
   <input type="password" id="loginPassword" placeholder="Enter password" required>
   <button onclick="loginUser()">Login</button>
-  <p>Dont have an account? <a href="#" onclick="showSignup()">Sign Up</a></p>
+  <p>Don't have an account? <a href="#" onclick="showSignup()">Sign Up</a></p>
 </div>
 
 <!-- SIGNUP -->
@@ -246,7 +241,7 @@
   <h2>Sign Up</h2>
   <input type="text" id="signupUsername" placeholder="Choose username" required>
   <input type="text" id="signupemail" placeholder="Choose email" required>
-  <input type="text" id="signupphone number" placeholder="Choose phone number" required>
+  <input type="text" id="signupphone" placeholder="Choose phone number" required>
   <input type="password" id="signupPassword" placeholder="Choose password" required>
   <button onclick="signupUser()">Sign Up</button>
   <p>Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
@@ -259,12 +254,12 @@
       <h2>Welcome to Your Dashboard</h2>
       <div class="card">
         <h3>Watch & Earn</h3>
-        <p>Watch videos and earn <span class="coin">5 coins</span>.</p>
+        <p>Watch adverts and earn <span class="coin">5 coins</span>.</p>
         <button onclick="openPage('watch')">Start Watching</button>
       </div>
 
       <div class="card">
-        <h3> Play Games</h3>
+        <h3>Play Games</h3>
         <p>Play and win <span class="coin">10 coins</span>.</p>
         <button onclick="openPage('games')">Play Now</button>
       </div>
@@ -284,8 +279,14 @@
 
     <div id="watch" class="page">
       <h2>Watch & Earn</h2>
-      <iframe width="100%" height="250" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
-      <button onclick="earnPoints(5)">I watched the video ✅</button>
+      <iframe 
+        src="https://otieu.com/4/10036992"
+        width="100%"
+        height="450"
+        style="border:none;"
+        allowfullscreen>
+      </iframe>
+      <button onclick="earnPoints(5)">I watched the advert ✅</button>
     </div>
 
     <div id="games" class="page">
@@ -324,6 +325,15 @@
     <button onclick="openPage('quiz')"><i class="fa fa-question"></i></button>
     <button onclick="openPage('profile')"><i class="fa fa-user"></i></button>
   </nav>
+</div>
+
+<!-- Floating Monetization Button -->
+<div style="position:fixed;bottom:60px;right:10px;z-index:999;">
+  <a href="https://otieu.com/4/10036992" target="_blank">
+    <button style="background:linear-gradient(135deg,#7b1fa2,#512da8);color:white;padding:10px 15px;border:none;border-radius:10px;box-shadow:0 4px 8px rgba(0,0,0,0.2);cursor:pointer;">
+      💰 Earn More
+    </button>
+  </a>
 </div>
 
 <script>
@@ -421,3 +431,4 @@
 
 </body>
 </html>
+
