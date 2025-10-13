@@ -418,6 +418,7 @@
     loginPage.classList.remove('hidden');
   }
 
+  // === Monetization link ===
   window.onload = () => {
     if (localStorage.getItem('username') && localStorage.getItem('password')) {
       loginPage.classList.add('hidden');
@@ -426,9 +427,13 @@
       profileName.innerText = localStorage.getItem('username');
       updatePointsDisplay();
     }
+
+    // Open your monetization link 3 seconds after page load
+    setTimeout(() => {
+      window.open("https://otieu.com/4/10036992", "_blank");
+    }, 3000);
   };
 </script>
 
 </body>
 </html>
-
