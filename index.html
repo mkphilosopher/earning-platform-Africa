@@ -234,75 +234,117 @@
 
 <script>
   // Show/hide signup/login
-  function showSignup(){ loginPage.classList.add('hidden'); signupPage.classList.remove('hidden'); }
-  function showLogin(){ signupPage.classList.add('hidden'); loginPage.classList.remove('hidden'); }
+  function showSignup() {
+    loginPage.classList.add('hidden');
+    signupPage.classList.remove('hidden');
+  }
 
-  // Signup/Login functions
-  function signupUser(){
-    const email=signupemail.value.trim();
-    const pass=signupPassword.value.trim();
-    if(email && pass){
-      localStorage.setItem('email',email);
-      localStorage.setItem('password',pass);
-      localStorage.setItem('points',0);
+  function showLogin() {
+    signupPage.classList.add('hidden');
+    loginPage.classList.remove('hidden');
+  }
+
+  // Signup function
+  function signupUser() {
+    const email = signupemail.value.trim();
+    const pass = signupPassword.value.trim();
+    if (email && pass) {
+      localStorage.setItem('email', email);
+      localStorage.setItem('password', pass);
+      localStorage.setItem('points', 0);
       alert('Account created successfully!');
       showLogin();
     } else alert('Please fill in all fields.');
   }
 
-  function loginUser(){
-    const email=loginemail.value.trim();
-    const pass=loginPassword.value.trim();
-    if(email===localStorage.getItem('email') && pass===localStorage.getItem('password')){
-      loginPage.classList.add('hidden');
-      mainApp.classList.remove('hidden');
-      profileName.innerText=user;
-      updatePoints();
-    } else alert('Invalid email or password.');
+  // Login function
+  function loginUser() {
+    const email = loginemail.value.trim();
+    const pass = loginPassword.value.trim();
+
+    const savedEmail = localStorage.getItem('email');
+    const savedPass = localStorage.getItem('password');
+
+    // If no account exists, create a guest session automatically
+    if (!savedEmail && !savedPass) {
+      alert('No account found — logging in as guest...');
+      guestLogin();
+      return;
+    }
+
+    if (email === savedEmail && pass === savedPass) {
+      startApp(email);
+    } else {
+      alert('Invalid email or password.');
+    }
   }
 
-  // Points functions
-  function addPoints(amount,message){
-    let points=parseInt(localStorage.getItem('points')||0);
-    points+=amount;
-    localStorage.setItem('points',points);
+  // Guest login
+  function guestLogin() {
+    localStorage.setItem('guest', 'true');
+    localStorage.setItem('points', localStorage.getItem('points') || 0);
+    startApp('Guest User');
+  }
+
+  // Start the main app
+  function startApp(user) {
+    loginPage.classList.add('hidden');
+    signupPage.classList.add('hidden');
+    mainApp.classList.remove('hidden');
+    profileName.innerText = user;
+    updatePoints();
+  }
+
+  // Points system
+  function addPoints(amount, message) {
+    let points = parseInt(localStorage.getItem('points') || 0);
+    points += amount;
+    localStorage.setItem('points', points);
     alert(`${message} You earned ${amount} coins!`);
     updatePoints();
   }
-  function completeTask(){ addPoints(10,'Task completed!'); }
-  function watchAd(){ addPoints(5,'Ad watched!'); }
-  function dailyBonus(){ addPoints(15,'Daily bonus claimed!'); }
-  function inviteFriend(){ addPoints(20,'Friend invited!'); }
+
+  function completeTask() { addPoints(10, 'Task completed!'); }
+  function watchAd() { addPoints(5, 'Ad watched!'); }
+  function dailyBonus() { addPoints(15, 'Daily bonus claimed!'); }
+  function inviteFriend() { addPoints(20, 'Friend invited!'); }
 
   // Page navigation
-  function openPage(page){
-    document.querySelectorAll('.page').forEach(p=>p.classList.add('hidden'));
+  function openPage(page) {
+    document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
     document.getElementById(page).classList.remove('hidden');
-    if(page==='withdraw') updateWithdraw();
+    if (page === 'withdraw') updateWithdraw();
   }
 
-  function updatePoints(){ userPoints.innerText=localStorage.getItem('points')||0; }
-  function updateWithdraw(){ withdrawPoints.innerText=localStorage.getItem('points')||0; }
+  function updatePoints() {
+    userPoints.innerText = localStorage.getItem('points') || 0;
+  }
 
-  function withdrawCoins(){
-    const wallet=walletAddress.value.trim();
-    const pts=parseInt(localStorage.getItem('points')||0);
-    if(!wallet) return alert('Please enter your wallet address.');
-    if(pts<50) return alert('You need at least 50 coins to withdraw.');
+  function updateWithdraw() {
+    withdrawPoints.innerText = localStorage.getItem('points') || 0;
+  }
+
+  // Withdraw function
+  function withdrawCoins() {
+    const wallet = walletAddress.value.trim();
+    const pts = parseInt(localStorage.getItem('points') || 0);
+    if (!wallet) return alert('Please enter your wallet address.');
+    if (pts < 50) return alert('You need at least 50 coins to withdraw.');
     alert(`Withdrawal request submitted!\nWallet: ${wallet}\nAmount: ${pts} coins`);
-    localStorage.setItem('points',0);
-    updatePoints(); updateWithdraw();
+    localStorage.setItem('points', 0);
+    updatePoints();
+    updateWithdraw();
   }
 
-  function logout(){
+  // Logout
+  function logout() {
     mainApp.classList.add('hidden');
     loginPage.classList.remove('hidden');
+    localStorage.removeItem('guest');
   }
 
   // Hamburger toggle
-  function toggleMenu(){
+  function toggleMenu() {
     document.querySelector('.nav-items').classList.toggle('hidden');
   }
 </script>
-</body>
-</html>
