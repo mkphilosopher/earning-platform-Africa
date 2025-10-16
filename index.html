@@ -274,7 +274,7 @@
     }
 
     if (email === savedEmail && pass === savedPass) {
-      startApp(email);
+      startApp(email, savedEmail);
     } else {
       alert('Invalid email or password.');
     }
@@ -283,16 +283,17 @@
   function guestLogin() {
     localStorage.setItem('guest', 'true');
     localStorage.setItem('points', localStorage.getItem('points') || 0);
-    startApp('Guest User');
+    startApp('Guest User', 'Guest');
   }
 
-  function startApp(user) {
+  function startApp(user, email) {
     loginPage.classList.add('hidden');
     signupPage.classList.add('hidden');
     mainApp.classList.remove('hidden');
     profileName.innerText = user;
-    profileEmail.innerText = localStorage.getItem('email') || 'Guest';
+    profileEmail.innerText = email || 'Guest';
     updatePoints();
+    openPage('profile'); // <-- Auto opens Profile page after login
   }
 
   function addPoints(amount, message) {
