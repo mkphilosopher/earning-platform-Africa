@@ -1,439 +1,308 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Smart Earning Platform</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
-  :root {
-    --primary: #7b1fa2;
-    --secondary: #512da8;
-    --bg: #f5f2fa;
-    --text: #333;
-    --radius: 14px;
-    --shadow: 0 5px 20px rgba(0,0,0,0.08);
-  }
-
-  * {
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
-  }
-
+  /* === GLOBAL === */
+  * { box-sizing: border-box; margin:0; padding:0; }
   body {
     font-family: 'Poppins', sans-serif;
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
+    background: #f7f7f8;
+    color: #333;
+    min-height: 100vh;
   }
 
   header {
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    color: white;
-    padding: 25px 10px;
+    background: #7b1fa2;
+    color: #fff;
     text-align: center;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    box-shadow: var(--shadow);
-  }
-
-  header h1 {
-    margin: 0;
-    font-size: 1.8rem;
-    letter-spacing: 0.5px;
-  }
-
-  .container {
     padding: 20px;
-    max-width: 900px;
-    margin: auto;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   }
 
-  .form-box {
+  /* Top navigation with Hamburger */
+  .top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    padding: 10px 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .hamburger {
+    font-size: 18px;   /* size of the hamburger */
+    cursor: pointer;   /* pointer on hover */
+    user-select: none; /* prevents text selection */
+}
+
+  .nav-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .nav-items button {
+    background: none;
+    border: none;
+    color: #7b1fa2;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .nav-items button i { font-size: 18px; }
+  .nav-items button:hover { color: #9c27b0; }
+
+  .hidden { display: none; }
+
+  /* Form & pages */
+  .form-box, .page {
+    width: 90%;
     max-width: 400px;
-    margin: 70px auto;
-    background: white;
-    padding: 35px 25px;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
+    margin: 25px auto;
+    background: #fff;
+    padding: 25px 20px;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
     text-align: center;
-    animation: fadeIn 0.6s ease;
   }
 
-  .coin-icon {
-    font-size: 60px;
-    color: gold;
-    margin-bottom: 10px;
-    animation: spin 3s linear infinite;
-  }
-
-  @keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-
-  .form-box h2 {
-    color: var(--primary);
-    margin-bottom: 15px;
-  }
-
-  .form-box input {
+  h2 { color: #7b1fa2; margin-bottom: 15px; font-size: 22px; }
+  input {
     width: 100%;
     padding: 12px;
-    margin: 8px 0;
+    margin: 10px 0 15px;
+    border-radius: 10px;
     border: 1px solid #ddd;
-    border-radius: var(--radius);
     font-size: 15px;
     outline: none;
     transition: 0.3s;
   }
+  input:focus { border-color: #9c27b0; }
 
-  .form-box input:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 6px rgba(123,31,162,0.3);
-  }
-
-  .form-box button {
+  button {
     width: 100%;
     padding: 12px;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    color: white;
+    margin: 8px 0;
     border: none;
-    border-radius: var(--radius);
-    cursor: pointer;
+    border-radius: 10px;
+    background: #7b1fa2;
+    color: #fff;
+    font-size: 16px;
     font-weight: 500;
-    margin-top: 10px;
-    transition: 0.3s;
-  }
-
-  .form-box button:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow);
-  }
-
-  .form-box a {
-    color: var(--primary);
-    text-decoration: none;
-    font-weight: 500;
-  }
-
-  .hidden { display: none; }
-
-  .card {
-    background: white;
-    padding: 20px;
-    margin: 15px 0;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    transition: 0.3s;
-  }
-
-  .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  }
-
-  .card h3 {
-    color: var(--primary);
-    margin-top: 0;
-  }
-
-  .card button {
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: var(--radius);
     cursor: pointer;
-    margin-top: 10px;
     transition: 0.3s;
   }
+  button:hover { background: #9c27b0; transform: scale(1.02); }
 
-  .card button:hover {
-    transform: scale(1.05);
-  }
+  a { color: #7b1fa2; text-decoration: none; font-weight: 500; }
+  a:hover { text-decoration: underline; }
 
-  .coin {
-    color: goldenrod;
-    font-weight: bold;
-  }
-
-  .page {
-    display: none;
-  }
-
-  .active {
-    display: block;
-    animation: fadeIn 0.5s ease;
-  }
-
-  nav {
-    background: white;
+  /* Task buttons */
+  .task-btn {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
-    padding: 10px 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-    border-radius: 15px 15px 0 0;
-    z-index: 10;
-  }
-
-  nav button {
-    background: none;
-    border: none;
-    font-size: 22px;
-    color: var(--primary);
-    cursor: pointer;
+    gap: 8px;
+    background: #9c27b0;
+    color: #fff;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 12px;
+    font-weight: 500;
+    font-size: 15px;
     transition: 0.3s;
   }
+  .task-btn:hover { background: #7b1fa2; transform: scale(1.03); }
 
-  nav button:hover {
-    transform: scale(1.2);
-    color: var(--secondary);
+  /* Modern marquee */
+  .marquee-container {
+    overflow: hidden;
+    background: #ffeb3b;
+    border-radius: 12px;
+    padding: 8px 0;
+    margin-bottom: 15px;
+  }
+  .marquee-text {
+    display: inline-block;
+    white-space: nowrap;
+    padding-left: 100%;
+    animation: marquee 12s linear infinite;
+    font-weight: 500;
+    color: #333;
+  }
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
   }
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @media (max-width: 768px) {
-    header h1 { font-size: 1.5rem; }
-    .form-box { margin: 40px 10px; padding: 25px 20px; }
-    iframe { height: 220px; }
-  }
-
-  @media (max-width: 480px) {
-    nav button { font-size: 20px; }
-    .card { padding: 18px; }
-    h2, h3 { font-size: 1rem; }
-    header { padding: 18px 5px; }
+  /* Responsive */
+  @media(min-width: 700px) {
+    .hamburger { display: none; }
+    .nav-items {
+      flex-direction: row;
+      gap: 15px;
+    }
   }
 </style>
 </head>
 
 <body>
-
-<header>
-  <h1>Smart Earning Platform</h1>
-  <p id="welcomeText"></p>
-</header>
+<header>Smart Earning Platform</header>
 
 <!-- LOGIN -->
 <div id="loginPage" class="form-box">
-  <i class="fa-solid fa-coins coin-icon"></i>
   <h2>Login</h2>
-  <input type="text" id="loginUsername" placeholder="Enter username" required>
-  <input type="password" id="loginPassword" placeholder="Enter password" required>
+  <input type="text" id="loginemail" placeholder="email">
+  <input type="password" id="loginPassword" placeholder="Password">
   <button onclick="loginUser()">Login</button>
-  <p>Don't have an account? <a href="#" onclick="showSignup()">Sign Up</a></p>
+  <p>No account? <a href="#" onclick="showSignup()">Sign Up</a></p>
 </div>
 
 <!-- SIGNUP -->
 <div id="signupPage" class="form-box hidden">
-  <i class="fa-solid fa-coins coin-icon"></i>
   <h2>Sign Up</h2>
-  <input type="text" id="signupUsername" placeholder="Choose username" required>
-  <input type="text" id="signupemail" placeholder="Choose email" required>
-  <input type="text" id="signupphone" placeholder="Choose phone number" required>
-  <input type="password" id="signupPassword" placeholder="Choose password" required>
+  <input type="text" id="signupemail" placeholder="email">
+  <input type="password" id="signupPassword" placeholder="Password">
   <button onclick="signupUser()">Sign Up</button>
   <p>Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
 </div>
 
 <!-- MAIN APP -->
 <div id="mainApp" class="hidden">
-  <div class="container">
-    <div id="home" class="page active">
-      <h2>Welcome to Your Dashboard</h2>
-      <div class="card">
-        <h3>Watch & Earn</h3>
-        <p>Watch adverts and earn <span class="coin">5 coins</span>.</p>
-        <button onclick="openPage('https://otieu.com/4/10037014')">Start Watching</button>
-      </div>
-
-      <div class="card">
-        <h3>Play Games</h3>
-        <p>Play and win <span class="coin">10 coins</span>.</p>
-        <button onclick="openPage('https://otieu.com/4/10037014')">Play Now</button>
-      </div>
-
-      <div class="card">
-        <h3>Quiz & Earn</h3>
-        <p>Answer quiz questions and earn <span class="coin">10 coins</span>.</p>
-        <button onclick="openPage('https://otieu.com/4/10037014')">Take Quiz</button>
-      </div>
-
-      <div class="card">
-        <h3>Withdraw Coins</h3>
-        <p>Redeem your earned coins.</p>
-        <button onclick="openPage('withdraw')">Withdraw</button>
-      </div>
-    </div>
-
-    <div id="watch" class="page">
-      <h2>Watch & Earn</h2>
-      <iframe 
-        src="https://otieu.com/4/10037014"
-        width="100%"
-        height="450"
-        style="border:none;"
-        allowfullscreen>
-      </iframe>
-      <button onclick="earnPoints(5)">I watched the advert ✅</button>
-    </div>
-
-    <div id="games" class="page">
-      <h2>Play a Game</h2>
-      <iframe src="https://otieu.com/4/10037014" width="100%" height="400"></iframe>
-      <button onclick="earnPoints(10)">I played the game ✅</button>
-    </div>
-
-    <div id="quiz" class="page">
-      <h2>Daily Quiz</h2>
-      <p>What does HTML stand for?</p>
-      <button onclick="checkQuiz('A')">A. Hyper Text Markup Language</button><br>
-      <button onclick="checkQuiz('B')">B. High Text Machine Language</button><br>
-      <button onclick="checkQuiz('C')">C. Hyper Tool Multi Language</button><br>
-    </div>
-
-    <div id="withdraw" class="page">
-      <h2>Withdraw Coins</h2>
-      <p>You have <span id="withdrawPoints" class="coin">0</span> coins.</p>
-      <input type="text" id="walletAddress" placeholder="Enter your wallet ID">
-      <button onclick="withdrawCoins()">Withdraw</button>
-    </div>
-
-    <div id="profile" class="page">
-      <h2>👤 Profile</h2>
-      <p><b>Username:</b> <span id="profileName"></span></p>
-      <p><b>Coins:</b> <span id="userPoints" class="coin">0</span></p>
-      <button onclick="logout()">Logout</button>
+  <div class="top-nav">
+    <button class="hamburger" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
+    <div class="nav-items hidden">
+      <button onclick="openPage('home')"><i class="fa-solid fa-house"></i>Home</button>
+      <button onclick="openPage('talk')"><i class="fa-solid fa-comment"></i>Talk</button>
+      <button onclick="openPage('withdraw')"><i class="fa-solid fa-wallet"></i>Withdraw</button>
+      <button onclick="openPage('profile')"><i class="fa-solid fa-user"></i>Profile</button>
     </div>
   </div>
 
-  <nav>
-    <button onclick="openPage('home')"><i class="fa fa-home"></i></button>
-    <button onclick="openPage('watch')"><i class="fa fa-video"></i></button>
-    <button onclick="openPage('games')"><i class="fa fa-gamepad"></i></button>
-    <button onclick="openPage('quiz')"><i class="fa fa-question"></i></button>
-    <button onclick="openPage('profile')"><i class="fa fa-user"></i></button>
-  </nav>
-</div>
+  <!-- HOME -->
+  <div id="home" class="page">
+    <div class="marquee-container">
+      <span class="marquee-text">Welcome to Smart Earning Platform! Complete tasks daily and earn coins! 🚀</span>
+    </div>
+    <h2>Welcome Back 👋</h2>
+    <p>Complete daily tasks to earn coins!</p>
+    <button class="task-btn" onclick="completeTask()"><i class="fa-solid fa-check-circle"></i> Complete Task (10 Coins)</button>
+    <button class="task-btn" onclick="watchAd()"><i class="fa-solid fa-video"></i> Watch Ad (5 Coins)</button>
+    <button class="task-btn" onclick="dailyBonus()"><i class="fa-solid fa-gift"></i> Daily Bonus (15 Coins)</button>
+    <button class="task-btn" onclick="inviteFriend()"><i class="fa-solid fa-user-group"></i> Invite Friend (20 Coins)</button>
+    <button class="task-btn" onclick="openPage('withdraw')"><i class="fa-solid fa-wallet"></i> Withdraw Coins</button>
+  </div>
 
-<!-- Floating Monetization Button -->
-<div style="position:fixed;bottom:60px;right:10px;z-index:999;">
-  <a href="https://otieu.com/4/10037014" target="_blank">
-    <button style="background:linear-gradient(135deg,#7b1fa2,#512da8);color:white;padding:10px 15px;border:none;border-radius:10px;box-shadow:0 4px 8px rgba(0,0,0,0.2);cursor:pointer;">
-      💰 Earn More
-    </button>
-  </a>
+  <!-- TALK -->
+  <div id="talk" class="page hidden">
+    <h2>Main Talk 💬</h2>
+    <p>Here you can see updates, messages, and community announcements!</p>
+    <div class="marquee-container">
+      <span class="marquee-text">🔥 New tasks available today! Don't miss your daily bonus! 🔥</span>
+    </div>
+  </div>
+
+  <!-- WITHDRAW -->
+  <div id="withdraw" class="page hidden">
+    <h2>Withdraw</h2>
+    <p>You have <strong><span id="withdrawPoints">0</span></strong> coins.</p>
+    <input type="text" id="walletAddress" placeholder="Wallet or Account ID">
+    <button onclick="withdrawCoins()"><i class="fa-solid fa-paper-plane"></i> Withdraw</button>
+  </div>
+
+  <!-- PROFILE -->
+  <div id="profile" class="page hidden">
+    <h2>Your Profile</h2>
+    <p><b>Username:</b> <span id="profileName"></span></p>
+    <p><b>Coins:</b> <span id="userPoints">0</span></p>
+    <button onclick="logout()"><i class="fa-solid fa-sign-out-alt"></i> Logout</button>
+  </div>
 </div>
 
 <script>
-  function openPage(page) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById(page).classList.add('active');
-    if (page === 'withdraw') updateWithdrawPage();
-  }
+  // Show/hide signup/login
+  function showSignup(){ loginPage.classList.add('hidden'); signupPage.classList.remove('hidden'); }
+  function showLogin(){ signupPage.classList.add('hidden'); loginPage.classList.remove('hidden'); }
 
-  function showSignup() {
-    document.getElementById('loginPage').classList.add('hidden');
-    document.getElementById('signupPage').classList.remove('hidden');
-  }
-
-  function showLogin() {
-    document.getElementById('signupPage').classList.add('hidden');
-    document.getElementById('loginPage').classList.remove('hidden');
-  }
-
-  function signupUser() {
-    const user = signupUsername.value.trim();
-    const pass = signupPassword.value.trim();
-    if (user && pass) {
-      localStorage.setItem('username', user);
-      localStorage.setItem('password', pass);
-      localStorage.setItem('points', 0);
+  // Signup/Login functions
+  function signupUser(){
+    const email=signupemail.value.trim();
+    const pass=signupPassword.value.trim();
+    if(email && pass){
+      localStorage.setItem('email',email);
+      localStorage.setItem('password',pass);
+      localStorage.setItem('points',0);
       alert('Account created successfully!');
       showLogin();
-    } else alert('Please fill all fields');
+    } else alert('Please fill in all fields.');
   }
 
-  function loginUser() {
-    const user = loginUsername.value.trim();
-    const pass = loginPassword.value.trim();
-    if (user === localStorage.getItem('username') && pass === localStorage.getItem('password')) {
+  function loginUser(){
+    const email=loginemail.value.trim();
+    const pass=loginPassword.value.trim();
+    if(email===localStorage.getItem('email') && pass===localStorage.getItem('password')){
       loginPage.classList.add('hidden');
-      signupPage.classList.add('hidden');
       mainApp.classList.remove('hidden');
-      welcomeText.innerText = 'Welcome, ' + user + '!';
-      profileName.innerText = user;
-      updatePointsDisplay();
-    } else alert('Invalid username or password');
+      profileName.innerText=user;
+      updatePoints();
+    } else alert('Invalid email or password.');
   }
 
-  function earnPoints(amount) {
-    let points = parseInt(localStorage.getItem('points') || 0);
-    points += amount;
-    localStorage.setItem('points', points);
-    alert(`You earned ${amount} coins!`);
-    updatePointsDisplay();
+  // Points functions
+  function addPoints(amount,message){
+    let points=parseInt(localStorage.getItem('points')||0);
+    points+=amount;
+    localStorage.setItem('points',points);
+    alert(`${message} You earned ${amount} coins!`);
+    updatePoints();
+  }
+  function completeTask(){ addPoints(10,'Task completed!'); }
+  function watchAd(){ addPoints(5,'Ad watched!'); }
+  function dailyBonus(){ addPoints(15,'Daily bonus claimed!'); }
+  function inviteFriend(){ addPoints(20,'Friend invited!'); }
+
+  // Page navigation
+  function openPage(page){
+    document.querySelectorAll('.page').forEach(p=>p.classList.add('hidden'));
+    document.getElementById(page).classList.remove('hidden');
+    if(page==='withdraw') updateWithdraw();
   }
 
-  function checkQuiz(answer) {
-    if (answer === 'A') {
-      earnPoints(10);
-      alert('Correct! You earned 10 coins.');
-    } else alert('Wrong answer!');
+  function updatePoints(){ userPoints.innerText=localStorage.getItem('points')||0; }
+  function updateWithdraw(){ withdrawPoints.innerText=localStorage.getItem('points')||0; }
+
+  function withdrawCoins(){
+    const wallet=walletAddress.value.trim();
+    const pts=parseInt(localStorage.getItem('points')||0);
+    if(!wallet) return alert('Please enter your wallet address.');
+    if(pts<50) return alert('You need at least 50 coins to withdraw.');
+    alert(`Withdrawal request submitted!\nWallet: ${wallet}\nAmount: ${pts} coins`);
+    localStorage.setItem('points',0);
+    updatePoints(); updateWithdraw();
   }
 
-  function updatePointsDisplay() {
-    userPoints.innerText = localStorage.getItem('points') || 0;
-  }
-
-  function updateWithdrawPage() {
-    withdrawPoints.innerText = localStorage.getItem('points') || 0;
-  }
-
-  function withdrawCoins() {
-    const wallet = walletAddress.value.trim();
-    const points = parseInt(localStorage.getItem('points') || 0);
-    if (wallet && points >= 50) {
-      alert(`Withdrawal request sent!\nWallet: ${wallet}\nAmount: ${points} coins`);
-      localStorage.setItem('points', 0);
-      updatePointsDisplay();
-      updateWithdrawPage();
-    } else if (points < 50) alert('You need at least 50 coins to withdraw.');
-    else alert('Enter a valid wallet address.');
-  }
-
-  function logout() {
+  function logout(){
     mainApp.classList.add('hidden');
     loginPage.classList.remove('hidden');
   }
 
-  // === Monetization link ===
-  window.onload = () => {
-    if (localStorage.getItem('username') && localStorage.getItem('password')) {
-      loginPage.classList.add('hidden');
-      mainApp.classList.remove('hidden');
-      welcomeText.innerText = 'Welcome, ' + localStorage.getItem('username') + '!';
-      profileName.innerText = localStorage.getItem('username');
-      updatePointsDisplay();
-    }
-
-    // Open your monetization link 3 seconds after page load
-    setTimeout(() => {
-      window.open("https://otieu.com/4/10036992", "_blank");
-    }, 3000);
-  };
+  // Hamburger toggle
+  function toggleMenu(){
+    document.querySelector('.nav-items').classList.toggle('hidden');
+  }
 </script>
-
 </body>
 </html>
