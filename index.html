@@ -267,7 +267,6 @@
   <button id="footProfile" onclick="openPage('profile')"><i class="fa-solid fa-user"></i>Profile</button>
   <button id="footSettings" onclick="openPage('settings')"><i class="fa-solid fa-gear"></i>Settings</button>
 </div>
-
 <script>
 function showSignup() {
   loginPage.classList.add('hidden');
@@ -324,6 +323,10 @@ function startApp(user) {
   highlightFooter('home');
 }
 
+function openSmartLink() {
+  window.open("https://www.effectivegatecpm.com/zpgakye2f6?key=7de72f3e5650d08881bede1eacc72160", "_blank");
+}
+
 function addPoints(amount, message) {
   let points = parseInt(localStorage.getItem('points') || 0);
   points += amount;
@@ -332,10 +335,22 @@ function addPoints(amount, message) {
   updatePoints();
 }
 
-function completeTask() { addPoints(10, 'Task completed!'); }
-function watchAd() { addPoints(5, 'Ad watched!'); }
-function dailyBonus() { addPoints(15, 'Daily bonus claimed!'); }
-function inviteFriend() { addPoints(20, 'Friend invited!'); }
+function completeTask() { 
+  addPoints(10, 'Task completed!'); 
+  openSmartLink();
+}
+function watchAd() { 
+  addPoints(5, 'Ad watched!'); 
+  openSmartLink();
+}
+function dailyBonus() { 
+  addPoints(15, 'Daily bonus claimed!'); 
+  openSmartLink();
+}
+function inviteFriend() { 
+  addPoints(20, 'Friend invited!'); 
+  // Removed openSmartLink() as requested
+}
 
 function openPage(page) {
   document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
