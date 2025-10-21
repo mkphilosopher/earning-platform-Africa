@@ -323,9 +323,10 @@ function startApp(user) {
   highlightFooter('home');
 }
 
-// ✅ Updated SmartLink
+// ✅ FIXED openSmartLink function
 function openSmartLink() {
   window.open("https://singingfiles.com/show.php?l=0&u=2461111&id=72827", "_blank");
+}
 
 function addPoints(amount, message) {
   let points = parseInt(localStorage.getItem('points') || 0);
@@ -349,7 +350,6 @@ function dailyBonus() {
 }
 function inviteFriend() { 
   addPoints(20, 'Friend invited!'); 
-  // openSmartLink() removed as requested
 }
 
 function openPage(page) {
@@ -417,6 +417,3 @@ function toggleMenu() {
   document.querySelector('.nav-items').classList.toggle('hidden');
 }
 </script>
-</body>
-</html>
-  
