@@ -6,177 +6,38 @@
 <title>Smart Earning Platform</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
-  /* === GLOBAL === */
-  * { box-sizing: border-box; margin:0; padding:0; }
-  body {
-    font-family: 'Poppins', sans-serif;
-    background: #f7f7f8;
-    color: #333;
-    min-height: 100vh;
-    padding-bottom: 60px; /* Space for footer */
-  }
-
-  header {
-    background: #7b1fa2;
-    color: #fff;
-    text-align: center;
-    padding: 20px;
-    font-size: 24px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  }
-
-  .top-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #fff;
-    padding: 10px 15px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    position: sticky;
-    top: 0;
-    z-index: 10;
-  }
-
-  .hamburger { font-size: 18px; cursor: pointer; user-select: none; }
-
-  .nav-items {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .nav-items button {
-    background: none;
-    border: none;
-    color: #7b1fa2;
-    font-size: 16px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-  .nav-items button i { font-size: 18px; }
-  .nav-items button:hover { color: #9c27b0; }
-
-  .hidden { display: none; }
-
-  .form-box, .page {
-    width: 90%;
-    max-width: 400px;
-    margin: 25px auto;
-    background: #fff;
-    padding: 25px 20px;
-    border-radius: 16px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-    text-align: center;
-  }
-
-  h2 { color: #7b1fa2; margin-bottom: 15px; font-size: 22px; }
-  input {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0 15px;
-    border-radius: 10px;
-    border: 1px solid #ddd;
-    font-size: 15px;
-    outline: none;
-    transition: 0.3s;
-  }
-  input:focus { border-color: #9c27b0; }
-
-  button {
-    width: 100%;
-    padding: 12px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 10px;
-    background: #7b1fa2;
-    color: #fff;
-    font-size: 16px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  button:hover { background: #9c27b0; transform: scale(1.02); }
-
-  a { color: #7b1fa2; text-decoration: none; font-weight: 500; }
-  a:hover { text-decoration: underline; }
-
-  .task-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    background: #9c27b0;
-    color: #fff;
-    padding: 12px;
-    margin: 10px 0;
-    border-radius: 12px;
-    font-weight: 500;
-    font-size: 15px;
-    transition: 0.3s;
-  }
-  .task-btn:hover { background: #7b1fa2; transform: scale(1.03); }
-
-  .marquee-container {
-    overflow: hidden;
-    background: #ffeb3b;
-    border-radius: 12px;
-    padding: 8px 0;
-    margin-bottom: 15px;
-  }
-  .marquee-text {
-    display: inline-block;
-    white-space: nowrap;
-    padding-left: 100%;
-    animation: marquee 12s linear infinite;
-    font-weight: 500;
-    color: #333;
-  }
-  @keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-100%); }
-  }
-
-  @media(min-width: 700px) {
-    .hamburger { display: none; }
-    .nav-items { flex-direction: row; gap: 15px; }
-  }
-
-  /* FOOTER */
-  #footerNav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background:#fff;
-    display:flex;
-    justify-content: space-around;
-    padding:10px 0;
-    box-shadow:0 -2px 10px rgba(0,0,0,0.1);
-    z-index: 20;
-  }
-  #footerNav button {
-    background:none;
-    border:none;
-    color:#7b1fa2;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    font-size:14px;
-    transition: 0.3s;
-  }
-  #footerNav button.active, #footerNav button:hover {
-    color:#9c27b0;
-  }
+* { box-sizing: border-box; margin:0; padding:0; }
+body { font-family: 'Poppins', sans-serif; background: #f7f7f8; color: #333; min-height: 100vh; padding-bottom: 60px; }
+header { background: #7b1fa2; color: #fff; text-align: center; padding: 20px; font-size: 24px; font-weight: 600; letter-spacing: 1px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+.top-nav { display: flex; justify-content: space-between; align-items: center; background: #fff; padding: 10px 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 10; }
+.hamburger { font-size: 18px; cursor: pointer; user-select: none; }
+.nav-items { display: flex; flex-direction: column; gap: 10px; }
+.nav-items button { background: none; border: none; color: #7b1fa2; font-size: 16px; cursor: pointer; display: flex; align-items: center; gap: 5px; }
+.nav-items button i { font-size: 18px; }
+.nav-items button:hover { color: #9c27b0; }
+.hidden { display: none; }
+.form-box, .page { width: 90%; max-width: 400px; margin: 25px auto; background: #fff; padding: 25px 20px; border-radius: 16px; box-shadow: 0 6px 20px rgba(0,0,0,0.08); text-align: center; }
+h2 { color: #7b1fa2; margin-bottom: 15px; font-size: 22px; }
+input { width: 100%; padding: 12px; margin: 10px 0 15px; border-radius: 10px; border: 1px solid #ddd; font-size: 15px; outline: none; transition: 0.3s; }
+input:focus { border-color: #9c27b0; }
+button { width: 100%; padding: 12px; margin: 8px 0; border: none; border-radius: 10px; background: #7b1fa2; color: #fff; font-size: 16px; font-weight: 500; cursor: pointer; transition: 0.3s; }
+button:hover { background: #9c27b0; transform: scale(1.02); }
+a { color: #7b1fa2; text-decoration: none; font-weight: 500; }
+a:hover { text-decoration: underline; }
+.task-btn { display: flex; justify-content: center; align-items: center; gap: 8px; background: #9c27b0; color: #fff; padding: 12px; margin: 10px 0; border-radius: 12px; font-weight: 500; font-size: 15px; transition: 0.3s; }
+.task-btn:hover { background: #7b1fa2; transform: scale(1.03); }
+.marquee-container { overflow: hidden; background: #ffeb3b; border-radius: 12px; padding: 8px 0; margin-bottom: 15px; }
+.marquee-text { display: inline-block; white-space: nowrap; padding-left: 100%; animation: marquee 12s linear infinite; font-weight: 500; color: #333; }
+@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+@media(min-width: 700px) { .hamburger { display: none; } .nav-items { flex-direction: row; gap: 15px; } }
+#footerNav { position: fixed; bottom: 0; left: 0; width: 100%; background:#fff; display:flex; justify-content: space-around; padding:10px 0; box-shadow:0 -2px 10px rgba(0,0,0,0.1); z-index: 20; }
+#footerNav button { background:none; border:none; color:#7b1fa2; display:flex; flex-direction:column; align-items:center; font-size:14px; transition: 0.3s; }
+#footerNav button.active, #footerNav button:hover { color:#9c27b0; }
 </style>
 </head>
 <body>
 <header>Smart Earning Platform</header>
 
-<!-- LOGIN -->
 <div id="loginPage" class="form-box">
   <h2>Login</h2>
   <input type="text" id="loginemail" placeholder="email">
@@ -186,7 +47,6 @@
   <p>No account? <a href="#" onclick="showSignup()">Sign Up</a></p>
 </div>
 
-<!-- SIGNUP -->
 <div id="signupPage" class="form-box hidden">
   <h2>Sign Up</h2>
   <input type="text" id="signupemail" placeholder="email">
@@ -195,7 +55,6 @@
   <p>Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
 </div>
 
-<!-- MAIN APP -->
 <div id="mainApp" class="hidden">
   <div class="top-nav">
     <button class="hamburger" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
@@ -208,7 +67,6 @@
     </div>
   </div>
 
-  <!-- HOME -->
   <div id="home" class="page">
     <div class="marquee-container">
       <span class="marquee-text">Welcome to Smart Earning Platform! Complete tasks daily and earn coins! 🚀</span>
@@ -222,7 +80,6 @@
     <button class="task-btn" onclick="openPage('withdraw')"><i class="fa-solid fa-wallet"></i> Withdraw Coins</button>
   </div>
 
-  <!-- TALK -->
   <div id="talk" class="page hidden">
     <h2>Main Talk 💬</h2>
     <p>Here you can see updates, messages, and community announcements!</p>
@@ -231,7 +88,6 @@
     </div>
   </div>
 
-  <!-- WITHDRAW -->
   <div id="withdraw" class="page hidden">
     <h2>Withdraw</h2>
     <p>You have <strong><span id="withdrawPoints">0</span></strong> coins.</p>
@@ -239,7 +95,6 @@
     <button onclick="withdrawCoins()"><i class="fa-solid fa-paper-plane"></i> Withdraw</button>
   </div>
 
-  <!-- PROFILE -->
   <div id="profile" class="page hidden">
     <h2>Your Profile</h2>
     <p><b>Username:</b> <span id="profileName"></span></p>
@@ -249,7 +104,6 @@
     <button onclick="logout()"><i class="fa-solid fa-sign-out-alt"></i> Logout</button>
   </div>
 
-  <!-- SETTINGS -->
   <div id="settings" class="page hidden">
     <h2>Settings ⚙️</h2>
     <p>Update your preferences below:</p>
@@ -260,160 +114,134 @@
   </div>
 </div>
 
-<!-- FOOTER NAV -->
 <div id="footerNav" style="display:none">
   <button id="footHome" onclick="openPage('home')"><i class="fa-solid fa-house"></i>Home</button>
   <button id="footTask" onclick="openPage('home')"><i class="fa-solid fa-check-circle"></i>Tasks</button>
   <button id="footProfile" onclick="openPage('profile')"><i class="fa-solid fa-user"></i>Profile</button>
   <button id="footSettings" onclick="openPage('settings')"><i class="fa-solid fa-gear"></i>Settings</button>
 </div>
+
 <script>
-function showSignup() {
-  loginPage.classList.add('hidden');
-  signupPage.classList.remove('hidden');
-}
-function showLogin() {
-  signupPage.classList.add('hidden');
-  loginPage.classList.remove('hidden');
-}
-function signupUser() {
-  const email = signupemail.value.trim();
-  const pass = signupPassword.value.trim();
-  if (email && pass) {
-    localStorage.setItem('email', email);
-    localStorage.setItem('password', pass);
-    localStorage.setItem('points', 0);
-    alert('Account created successfully!');
-    showLogin();
-  } else alert('Please fill in all fields.');
-}
-function loginUser() {
-  const email = loginemail.value.trim();
-  const pass = loginPassword.value.trim();
-  const savedEmail = localStorage.getItem('email');
-  const savedPass = localStorage.getItem('password');
+const loginPage = document.getElementById('loginPage');
+const signupPage = document.getElementById('signupPage');
+const mainApp = document.getElementById('mainApp');
+const profileName = document.getElementById('profileName');
+const profileEmail = document.getElementById('profileEmail');
+const userPoints = document.getElementById('userPoints');
+const withdrawPoints = document.getElementById('withdrawPoints');
+const footerNav = document.getElementById('footerNav');
+const footHome = document.getElementById('footHome');
+const footTask = document.getElementById('footTask');
+const footProfile = document.getElementById('footProfile');
+const footSettings = document.getElementById('footSettings');
+const loginemail = document.getElementById('loginemail');
+const loginPassword = document.getElementById('loginPassword');
+const signupemail = document.getElementById('signupemail');
+const signupPassword = document.getElementById('signupPassword');
+const walletAddress = document.getElementById('walletAddress');
 
-  if (!savedEmail && !savedPass) {
-    alert('No account found — logging in as guest...');
-    guestLogin();
-    return;
-  }
+function showSignup(){ loginPage.classList.add('hidden'); signupPage.classList.remove('hidden'); }
+function showLogin(){ signupPage.classList.add('hidden'); loginPage.classList.remove('hidden'); }
 
-  if (email === savedEmail && pass === savedPass) {
-    startApp(email);
-  } else {
-    alert('Invalid email or password.');
-  }
+function signupUser(){
+  const email=signupemail.value.trim();
+  const pass=signupPassword.value.trim();
+  if(!email||!pass){ alert('Please fill all fields'); return; }
+  localStorage.setItem('email',email);
+  localStorage.setItem('password',pass);
+  localStorage.setItem('points','0');
+  alert('Account created successfully!');
+  showLogin();
 }
 
-function guestLogin() {
-  localStorage.setItem('guest', 'true');
-  localStorage.setItem('points', localStorage.getItem('points') || 0);
+function loginUser(){
+  const email=loginemail.value.trim();
+  const pass=loginPassword.value.trim();
+  const savedEmail=localStorage.getItem('email');
+  const savedPass=localStorage.getItem('password');
+  if(!savedEmail||!savedPass){ guestLogin(); return; }
+  if(email===savedEmail&&pass===savedPass){ startApp(email); } else alert('Invalid email or password.');
+}
+
+function guestLogin(){
+  localStorage.setItem('guest','true');
+  if(!localStorage.getItem('points')) localStorage.setItem('points','0');
   startApp('Guest User');
 }
 
-function startApp(user) {
+function startApp(user){
   loginPage.classList.add('hidden');
   signupPage.classList.add('hidden');
   mainApp.classList.remove('hidden');
-  footerNav.style.display = 'flex'; // show footer after login
-  profileName.innerText = user;
-  profileEmail.innerText = localStorage.getItem('email') || 'Guest';
+  footerNav.style.display='flex';
+  profileName.innerText=user;
+  profileEmail.innerText=localStorage.getItem('email')||'Guest';
   updatePoints();
   highlightFooter('home');
 }
 
-// ✅ FIXED openSmartLink function
-function openSmartLink() {
-  window.open("https://singingfiles.com/show.php?l=0&u=2461111&id=72065 "_blank");
+function openSmartLink(){ 
+  window.open("https://singingfiles.com/show.php?l=0&u=2461111&id=72065","_blank"); 
 }
 
-function addPoints(amount, message) {
-  let points = parseInt(localStorage.getItem('points') || 0);
-  points += amount;
-  localStorage.setItem('points', points);
-  alert(`${message} You earned ${amount} coins!`);
+function addPoints(amount,message,openLink=false){
+  let pts=parseInt(localStorage.getItem('points')||'0');
+  pts+=amount;
+  localStorage.setItem('points',pts);
+  alert(`${message} You ea0rned ${amount} coins!`);
   updatePoints();
+  if(openLink) openSmartLink();
 }
 
-function completeTask() { 
-  addPoints(10, 'Task completed!'); 
-  openSmartLink();
-}
-function watchAd() { 
-  addPoints(5, 'Ad watched!'); 
-  openSmartLink();
-}
-function dailyBonus() { 
-  addPoints(15, 'Daily bonus claimed!'); 
-  openSmartLink();
-}
-function inviteFriend() { 
-  addPoints(20, 'Friend invited!'); 
-}
+function completeTask(){ addPoints(10,'Task completed!',true); }
+function watchAd(){ addPoints(5,'Ad watched!',true); }
+function dailyBonus(){ addPoints(15,'Daily bonus claimed!',true); }
+function inviteFriend(){ addPoints(20,'Friend invited!'); }
 
-function openPage(page) {
-  document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
+function openPage(page){
+  document.querySelectorAll('.page').forEach(p=>p.classList.add('hidden'));
   document.getElementById(page).classList.remove('hidden');
-  if (page === 'withdraw') updateWithdraw();
+  if(page==='withdraw') updateWithdraw();
   highlightFooter(page);
 }
 
-function highlightFooter(page) {
-  document.querySelectorAll('#footerNav button').forEach(btn => btn.classList.remove('active'));
-  if (page === 'home') { footHome.classList.add('active'); footTask.classList.add('active'); }
-  if (page === 'profile') footProfile.classList.add('active');
-  if (page === 'settings') footSettings.classList.add('active');
+function highlightFooter(page){
+  [footHome,footTask,footProfile,footSettings].forEach(b=>b.classList.remove('active'));
+  if(page==='home'){ footHome.classList.add('active'); footTask.classList.add('active'); }
+  if(page==='talk') footTask.classList.add('active');
+  if(page==='profile') footProfile.classList.add('active');
+  if(page==='settings') footSettings.classList.add('active');
 }
 
-function updatePoints() { userPoints.innerText = localStorage.getItem('points') || 0; }
-function updateWithdraw() { withdrawPoints.innerText = localStorage.getItem('points') || 0; }
+function updatePoints(){ userPoints.innerText=localStorage.getItem('points')||'0'; }
+function updateWithdraw(){ withdrawPoints.innerText=localStorage.getItem('points')||'0'; }
 
-function withdrawCoins() {
-  const wallet = walletAddress.value.trim();
-  const pts = parseInt(localStorage.getItem('points') || 0);
-  if (!wallet) return alert('Please enter your wallet address.');
-  if (pts < 50) return alert('You need at least 50 coins to withdraw.');
+function withdrawCoins(){
+  const wallet=walletAddress.value.trim();
+  const pts=parseInt(localStorage.getItem('points')||'0');
+  if(!wallet) return alert('Enter your wallet');
+  if(pts<50) return alert('Need at least 50 coins to withdraw');
   alert(`Withdrawal request submitted!\nWallet: ${wallet}\nAmount: ${pts} coins`);
-  localStorage.setItem('points', 0);
-  updatePoints();
-  updateWithdraw();
+  localStorage.setItem('points','0');
+  updatePoints(); updateWithdraw();
 }
 
-function changePassword() {
-  const newPass = document.getElementById('newPassword').value.trim();
-  if (!newPass) return alert('Enter a new password.');
-  localStorage.setItem('password', newPass);
-  alert('Password updated successfully!');
+function changePassword(){
+  const newPass=document.getElementById('newPassword').value.trim();
+  if(!newPass) return alert('Enter a new password');
+  localStorage.setItem('password',newPass);
+  alert('Password updated!');
 }
 
-function toggleTheme() {
+function toggleTheme(){
   document.body.classList.toggle('dark');
-  if (document.body.classList.contains('dark')) {
-    document.body.style.background = '#222';
-    document.body.style.color = '#eee';
-  } else {
-    document.body.style.background = '#f7f7f8';
-    document.body.style.color = '#333';
-  }
+  document.body.style.background=document.body.classList.contains('dark')?'#222':'#f7f7f8';
+  document.body.style.color=document.body.classList.contains('dark')?'#eee':'#333';
 }
 
-function deleteAccount() {
-  if (confirm('Are you sure you want to delete your account?')) {
-    localStorage.clear();
-    alert('Account deleted.');
-    location.reload();
-  }
-}
-
-function logout() {
-  mainApp.classList.add('hidden');
-  loginPage.classList.remove('hidden');
-  footerNav.style.display = 'none'; // hide footer after logout
-  localStorage.removeItem('guest');
-}
-
-function toggleMenu() {
-  document.querySelector('.nav-items').classList.toggle('hidden');
-}
+function deleteAccount(){ if(confirm('Delete account?')){ localStorage.clear(); alert('Account deleted'); location.reload(); } }
+function logout(){ mainApp.classList.add('hidden'); loginPage.classList.remove('hidden'); footerNav.style.display='none'; localStorage.removeItem('guest'); }
+function toggleMenu(){ document.querySelector('.nav-items').classList.toggle('hidden'); }
 </script>
+</body>
+</html>
