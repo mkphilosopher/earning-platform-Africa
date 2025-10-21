@@ -120,7 +120,6 @@ a:hover { text-decoration: underline; }
   <button id="footProfile" onclick="openPage('profile')"><i class="fa-solid fa-user"></i>Profile</button>
   <button id="footSettings" onclick="openPage('settings')"><i class="fa-solid fa-gear"></i>Settings</button>
 </div>
-
 <script>
 const loginPage = document.getElementById('loginPage');
 const signupPage = document.getElementById('signupPage');
@@ -160,7 +159,8 @@ function loginUser(){
   const savedEmail=localStorage.getItem('email');
   const savedPass=localStorage.getItem('password');
   if(!savedEmail||!savedPass){ guestLogin(); return; }
-  if(email===savedEmail&&pass===savedPass){ startApp(email); } else alert('Invalid email or password.');
+  if(email===savedEmail&&pass===savedPass){ startApp(email); } 
+  else alert('Invalid email or password.');
 }
 
 function guestLogin(){
@@ -181,14 +181,14 @@ function startApp(user){
 }
 
 function openSmartLink(){ 
-  window.open("https://singingfiles.com/show.php?l=0&u=2461111&id=70075&tracking_id="_blank"); 
+  window.open("https://singingfiles.com/show.php?l=0&u=2461111&id=70075&tracking_id=", "_blank"); 
 }
 
 function addPoints(amount,message,openLink=false){
   let pts=parseInt(localStorage.getItem('points')||'0');
   pts+=amount;
   localStorage.setItem('points',pts);
-  alert(`${message} You ea0rned ${amount} coins!`);
+  alert(`${message} You earned ${amount} coins!`);
   updatePoints();
   if(openLink) openSmartLink();
 }
@@ -239,9 +239,22 @@ function toggleTheme(){
   document.body.style.color=document.body.classList.contains('dark')?'#eee':'#333';
 }
 
-function deleteAccount(){ if(confirm('Delete account?')){ localStorage.clear(); alert('Account deleted'); location.reload(); } }
-function logout(){ mainApp.classList.add('hidden'); loginPage.classList.remove('hidden'); footerNav.style.display='none'; localStorage.removeItem('guest'); }
-function toggleMenu(){ document.querySelector('.nav-items').classList.toggle('hidden'); }
+function deleteAccount(){ 
+  if(confirm('Delete account?')){
+    localStorage.clear(); 
+    alert('Account deleted'); 
+    location.reload(); 
+  } 
+}
+
+function logout(){ 
+  mainApp.classList.add('hidden'); 
+  loginPage.classList.remove('hidden'); 
+  footerNav.style.display='none'; 
+  localStorage.removeItem('guest'); 
+}
+
+function toggleMenu(){ 
+  document.querySelector('.nav-items').classList.toggle('hidden'); 
+}
 </script>
-</body>
-</html>
