@@ -62,7 +62,8 @@ a:hover { text-decoration: underline; }
       <button onclick="openPage('home')"><i class="fa-solid fa-house"></i>Home</button>
       <button onclick="openPage('talk')"><i class="fa-solid fa-comment"></i>Talk</button>
       <button onclick="openPage('withdraw')"><i class="fa-solid fa-wallet"></i>Withdraw</button>
-      <button onclick="openPage('profile')"><i class="fa-solid fa-user"></i>Profile</button>class="fa-solid fa-gear"></i>Settings</button>
+      <button onclick="openPage('profile')"><i class="fa-solid fa-user"></i>Profile</button>
+      <button onclick="openPage('settings')"><i class="fa-solid fa-gear"></i>Settings</button>
     </div>
   </div>
 
@@ -72,32 +73,17 @@ a:hover { text-decoration: underline; }
     </div>
     <h2>Welcome Back 👋</h2>
     <p>Complete daily tasks to earn coins!</p>
-    <button class="task-btn" onclick="completeTask()">
-  <i class="fa-solid fa-check-circle"></i> Complete Task (10 Coins)
-</button>
-<button class="task-btn" onclick="watchAd()">
-  <i class="fa-solid fa-video"></i> Watch Ad (5 Coins)
-</button>
-<button class="task-btn" onclick="dailyBonus()">
-  <i class="fa-solid fa-gift"></i> Daily Bonus (15 Coins)
-</button>
-<button class="task-btn" onclick="inviteFriend()">
-  <i class="fa-solid fa-user-group"></i> Invite Friend (20 Coins)
-</button>
-<button class="task-btn" onclick="openPage('withdraw')">
-  <i class="fa-solid fa-wallet"></i> Withdraw Coins
-</button>
-<button class="task-btn" onclick="installApp()">
-  <i class="fa-solid fa-mobile-screen-button"></i> Install App (30 Coins)
-</button>
-    </div>
+    <button class="task-btn" onclick="completeTask()"><i class="fa-solid fa-check-circle"></i> Complete Task (10 Coins)</button>
+    <button class="task-btn" onclick="watchAd()"><i class="fa-solid fa-video"></i> Watch Ad (5 Coins)</button>
+    <button class="task-btn" onclick="dailyBonus()"><i class="fa-solid fa-gift"></i> Daily Bonus (15 Coins)</button>
+    <button class="task-btn" onclick="inviteFriend()"><i class="fa-solid fa-user-group"></i> Invite Friend (20 Coins)</button>
+    <button class="task-btn" onclick="openPage('withdraw')"><i class="fa-solid fa-wallet"></i> Withdraw Coins</button>
+    <button class="task-btn" onclick="installApp()"><i class="fa-solid fa-mobile-screen-button"></i> Install App (30 Coins)</button>
+  </div>
 
   <div id="talk" class="page hidden">
     <h2>Main Talk 💬</h2>
     <p>Here you can see updates, messages, and community announcements!</p>
-    <div class="marquee-container">
-      <span class="marquee-text">🔥 New tasks available today! Don't miss your daily bonus! 🔥</span>
-    </div>
   </div>
 
   <div id="withdraw" class="page hidden">
@@ -132,24 +118,17 @@ a:hover { text-decoration: underline; }
   <button id="footProfile" onclick="openPage('profile')"><i class="fa-solid fa-user"></i>Profile</button>
   <button id="footSettings" onclick="openPage('settings')"><i class="fa-solid fa-gear"></i>Settings</button>
 </div>
-  <script>
-const loginPage = document.getElementById('loginPage');
-const signupPage = document.getElementById('signupPage');
-const mainApp = document.getElementById('mainApp');
-const profileName = document.getElementById('profileName');
-const profileEmail = document.getElementById('profileEmail');
-const userPoints = document.getElementById('userPoints');
-const withdrawPoints = document.getElementById('withdrawPoints');
-const footerNav = document.getElementById('footerNav');
-const footHome = document.getElementById('footHome');
-const footTask = document.getElementById('footTask');
-const footProfile = document.getElementById('footProfile');
-const footSettings = document.getElementById('footSettings');
-const loginemail = document.getElementById('loginemail');
-const loginPassword = document.getElementById('loginPassword');
-const signupemail = document.getElementById('signupemail');
-const signupPassword = document.getElementById('signupPassword');
-const walletAddress = document.getElementById('walletAddress');
+
+<script>
+const loginPage=document.getElementById('loginPage');
+const signupPage=document.getElementById('signupPage');
+const mainApp=document.getElementById('mainApp');
+const profileName=document.getElementById('profileName');
+const profileEmail=document.getElementById('profileEmail');
+const userPoints=document.getElementById('userPoints');
+const withdrawPoints=document.getElementById('withdrawPoints');
+const footerNav=document.getElementById('footerNav');
+const walletAddress=document.getElementById('walletAddress');
 
 function showSignup(){ loginPage.classList.add('hidden'); signupPage.classList.remove('hidden'); }
 function showLogin(){ signupPage.classList.add('hidden'); loginPage.classList.remove('hidden'); }
@@ -189,37 +168,25 @@ function startApp(user){
   profileName.innerText=user;
   profileEmail.innerText=localStorage.getItem('email')||'Guest';
   updatePoints();
-  highlightFooter('home');
 }
 
 /* -------------------------------
-   Smart Links Section
+   Smart Link (SingingFiles)
 --------------------------------*/
-function openMobideaLink(){ 
-  // ✅ Mobidea install app link (only for install app tasks)
-  window.open("https://www.underlingmistery.work/?sl=6020415-50b32&pub_click_id={External_ID_from_traffic_source}&site={subID}&pub_sub_id={sub_subID}", "_blank"); 
-}
-
 function openSmartLink(){ 
-  // Default link for other tasks
-  window.open(" https://singingfiles.com/show.php?l=0&u=2461111&id=72913"," blank");
+  window.open("https://singingfiles.com/show.php?l=0&u=2461111&id=72913","_blank");
 }
 
 /* -------------------------------
    Points System
 --------------------------------*/
-function addPoints(amount,message,openLink=false,installTask=false){
+function addPoints(amount,message,openLink=false){
   let pts=parseInt(localStorage.getItem('points')||'0');
   pts+=amount;
   localStorage.setItem('points',pts);
   alert(`${message} You earned ${amount} coins!`);
   updatePoints();
-
-  // If openLink is true, open the right link
-  if(openLink){
-    if(installTask) openMobideaLink(); 
-    else openSmartLink();
-  }
+  if(openLink) openSmartLink();
 }
 
 /* -------------------------------
@@ -229,33 +196,17 @@ function completeTask(){ addPoints(10,'Task completed!',true); }
 function watchAd(){ addPoints(5,'Ad watched!',true); }
 function dailyBonus(){ addPoints(15,'Daily bonus claimed!',true); }
 function inviteFriend(){ addPoints(20,'Friend invited!'); }
-
-/* ✅ NEW — Install App Task using Mobidea link */
-function installApp(){ 
-  addPoints(25,'App installed!',true,true); 
-}
+function installApp(){ addPoints(30,'App installed!',true); }
 
 /* -------------------------------
-   Page & Navigation
+   Navigation
 --------------------------------*/
 function openPage(page){
   document.querySelectorAll('.page').forEach(p=>p.classList.add('hidden'));
   document.getElementById(page).classList.remove('hidden');
   if(page==='withdraw') updateWithdraw();
-  highlightFooter(page);
 }
 
-function highlightFooter(page){
-  [footHome,footTask,footProfile,footSettings].forEach(b=>b.classList.remove('active'));
-  if(page==='home'){ footHome.classList.add('active'); footTask.classList.add('active'); }
-  if(page==='talk') footTask.classList.add('active');
-  if(page==='profile') footProfile.classList.add('active');
-  if(page==='settings') footSettings.classList.add('active');
-}
-
-/* -------------------------------
-   Profile & Wallet
---------------------------------*/
 function updatePoints(){ userPoints.innerText=localStorage.getItem('points')||'0'; }
 function updateWithdraw(){ withdrawPoints.innerText=localStorage.getItem('points')||'0'; }
 
@@ -282,23 +233,9 @@ function toggleTheme(){
   document.body.style.color=document.body.classList.contains('dark')?'#eee':'#333';
 }
 
-function deleteAccount(){ 
-  if(confirm('Delete account?')){
-    localStorage.clear(); 
-    alert('Account deleted'); 
-    location.reload(); 
-  } 
-}
-
-function logout(){ 
-  mainApp.classList.add('hidden'); 
-  loginPage.classList.remove('hidden'); 
-  footerNav.style.display='none'; 
-  localStorage.removeItem('guest'); 
-}
-
-function toggleMenu(){ 
-  document.querySelector('.nav-items').classList.toggle('hidden'); 
-}
-  </script>
-
+function deleteAccount(){ if(confirm('Delete account?')){ localStorage.clear(); alert('Account deleted'); location.reload(); } }
+function logout(){ mainApp.classList.add('hidden'); loginPage.classList.remove('hidden'); footerNav.style.display='none'; localStorage.removeItem('guest'); }
+function toggleMenu(){ document.querySelector('.nav-items').classList.toggle('hidden'); }
+</script>
+</body>
+</html>
