@@ -132,7 +132,7 @@ a:hover { text-decoration: underline; }
   <button id="footProfile" onclick="openPage('profile')"><i class="fa-solid fa-user"></i>Profile</button>
   <button id="footSettings" onclick="openPage('settings')"><i class="fa-solid fa-gear"></i>Settings</button>
 </div>
-<script>
+  <script>
 const loginPage = document.getElementById('loginPage');
 const signupPage = document.getElementById('signupPage');
 const mainApp = document.getElementById('mainApp');
@@ -192,24 +192,52 @@ function startApp(user){
   highlightFooter('home');
 }
 
+/* -------------------------------
+   Smart Links Section
+--------------------------------*/
+function openMobideaLink(){ 
+  // ✅ Mobidea install app link (only for install app tasks)
+  window.open("https://www.underlingmistery.work/?sl=6020415-50b32&pub_click_id={External_ID_from_traffic_source}&site={subID}&pub_sub_id={sub_subID}", "_blank"); 
+}
+
 function openSmartLink(){ 
+  // Default link for other tasks
   window.open("https://singingfiles.com/show.php?l=0&u=2461111&id=70075&tracking_id=", "_blank"); 
 }
 
-function addPoints(amount,message,openLink=false){
+/* -------------------------------
+   Points System
+--------------------------------*/
+function addPoints(amount,message,openLink=false,installTask=false){
   let pts=parseInt(localStorage.getItem('points')||'0');
   pts+=amount;
   localStorage.setItem('points',pts);
   alert(`${message} You earned ${amount} coins!`);
   updatePoints();
-  if(openLink) openSmartLink();
+
+  // If openLink is true, open the right link
+  if(openLink){
+    if(installTask) openMobideaLink(); 
+    else openSmartLink();
+  }
 }
 
+/* -------------------------------
+   Tasks
+--------------------------------*/
 function completeTask(){ addPoints(10,'Task completed!',true); }
 function watchAd(){ addPoints(5,'Ad watched!',true); }
 function dailyBonus(){ addPoints(15,'Daily bonus claimed!',true); }
 function inviteFriend(){ addPoints(20,'Friend invited!'); }
 
+/* ✅ NEW — Install App Task using Mobidea link */
+function installApp(){ 
+  addPoints(25,'App installed!',true,true); 
+}
+
+/* -------------------------------
+   Page & Navigation
+--------------------------------*/
 function openPage(page){
   document.querySelectorAll('.page').forEach(p=>p.classList.add('hidden'));
   document.getElementById(page).classList.remove('hidden');
@@ -225,6 +253,9 @@ function highlightFooter(page){
   if(page==='settings') footSettings.classList.add('active');
 }
 
+/* -------------------------------
+   Profile & Wallet
+--------------------------------*/
 function updatePoints(){ userPoints.innerText=localStorage.getItem('points')||'0'; }
 function updateWithdraw(){ withdrawPoints.innerText=localStorage.getItem('points')||'0'; }
 
@@ -269,4 +300,5 @@ function logout(){
 function toggleMenu(){ 
   document.querySelector('.nav-items').classList.toggle('hidden'); 
 }
-</script>
+  </script>
+
