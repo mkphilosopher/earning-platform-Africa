@@ -62,8 +62,7 @@ a:hover { text-decoration: underline; }
       <button onclick="openPage('home')"><i class="fa-solid fa-house"></i>Home</button>
       <button onclick="openPage('talk')"><i class="fa-solid fa-comment"></i>Talk</button>
       <button onclick="openPage('withdraw')"><i class="fa-solid fa-wallet"></i>Withdraw</button>
-      <button onclick="openPage('profile')"><i class="fa-solid fa-user"></i>Profile</button>
-      <button onclick="openPage('settings')"><i class="fa-solid fa-gear"></i>Settings</button>
+      <button onclick="openPage('profile')"><i class="fa-solid fa-user"></i>Profile</button>class="fa-solid fa-gear"></i>Settings</button>
     </div>
   </div>
 
@@ -73,12 +72,25 @@ a:hover { text-decoration: underline; }
     </div>
     <h2>Welcome Back 👋</h2>
     <p>Complete daily tasks to earn coins!</p>
-    <button class="task-btn" onclick="completeTask()"><i class="fa-solid fa-check-circle"></i> Complete Task (10 Coins)</button>
-    <button class="task-btn" onclick="watchAd()"><i class="fa-solid fa-video"></i> Watch Ad (5 Coins)</button>
-    <button class="task-btn" onclick="dailyBonus()"><i class="fa-solid fa-gift"></i> Daily Bonus (15 Coins)</button>
-    <button class="task-btn" onclick="inviteFriend()"><i class="fa-solid fa-user-group"></i> Invite Friend (20 Coins)</button>
-    <button class="task-btn" onclick="openPage('withdraw')"><i class="fa-solid fa-wallet"></i> Withdraw Coins</button>
-  </div>
+    <button class="task-btn" onclick="completeTask()">
+  <i class="fa-solid fa-check-circle"></i> Complete Task (10 Coins)
+</button>
+<button class="task-btn" onclick="watchAd()">
+  <i class="fa-solid fa-video"></i> Watch Ad (5 Coins)
+</button>
+<button class="task-btn" onclick="dailyBonus()">
+  <i class="fa-solid fa-gift"></i> Daily Bonus (15 Coins)
+</button>
+<button class="task-btn" onclick="inviteFriend()">
+  <i class="fa-solid fa-user-group"></i> Invite Friend (20 Coins)
+</button>
+<button class="task-btn" onclick="openPage('withdraw')">
+  <i class="fa-solid fa-wallet"></i> Withdraw Coins
+</button>
+<button class="task-btn" onclick="installApp()">
+  <i class="fa-solid fa-mobile-screen-button"></i> Install App (30 Coins)
+</button>
+    </div>
 
   <div id="talk" class="page hidden">
     <h2>Main Talk 💬</h2>
