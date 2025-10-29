@@ -134,23 +134,23 @@ function showSignup(){ loginPage.classList.add('hidden'); signupPage.classList.r
 function showLogin(){ signupPage.classList.add('hidden'); loginPage.classList.remove('hidden'); }
 
 function signupUser(){
-  const email=signupemail.value.trim();
-  const pass=signupPassword.value.trim();
-  if(!email||!pass){ alert('Please fill all fields'); return; }
-  localStorage.setItem('email',email);
-  localStorage.setItem('password',pass);
+  const email = document.getElementById('signupemail').value.trim();
+  const pass = document.getElementById('signupPassword').value.trim();
+  if(!email || !pass){ alert('Please fill all fields'); return; }
+  localStorage.setItem('email', email);
+  localStorage.setItem('password', pass);
   localStorage.setItem('points','0');
   alert('Account created successfully!');
   showLogin();
 }
 
 function loginUser(){
-  const email=loginemail.value.trim();
-  const pass=loginPassword.value.trim();
-  const savedEmail=localStorage.getItem('email');
-  const savedPass=localStorage.getItem('password');
-  if(!savedEmail||!savedPass){ guestLogin(); return; }
-  if(email===savedEmail&&pass===savedPass){ startApp(email); } 
+  const email = document.getElementById('loginemail').value.trim();
+  const pass = document.getElementById('loginPassword').value.trim();
+  const savedEmail = localStorage.getItem('email');
+  const savedPass = localStorage.getItem('password');
+  if(!savedEmail || !savedPass){ guestLogin(); return; }
+  if(email === savedEmail && pass === savedPass){ startApp(email); } 
   else alert('Invalid email or password.');
 }
 
@@ -165,25 +165,26 @@ function startApp(user){
   signupPage.classList.add('hidden');
   mainApp.classList.remove('hidden');
   footerNav.style.display='flex';
-  profileName.innerText=user;
-  profileEmail.innerText=localStorage.getItem('email')||'Guest';
+  profileName.innerText = user;
+  profileEmail.innerText = localStorage.getItem('email') || 'Guest';
   updatePoints();
+  openPage('home'); // ensure home page shows
 }
 
 /* -------------------------------
    Smart Link (SingingFiles)
 --------------------------------*/
 function openSmartLink(){ 
-  window.open("https://singingfiles.com/show.php?l=0&u=2461111&id=70075"_blank");
+  window.open("https://singingfiles.com/show.php?l=0&u=2461111&id=72913","_blank");
 }
 
 /* -------------------------------
    Points System
 --------------------------------*/
 function addPoints(amount,message,openLink=false){
-  let pts=parseInt(localStorage.getItem('points')||'0');
-  pts+=amount;
-  localStorage.setItem('points',pts);
+  let pts = parseInt(localStorage.getItem('points') || '0', 10);
+  pts += amount;
+  localStorage.setItem('points', pts);
   alert(`${message} You earned ${amount} coins!`);
   updatePoints();
   if(openLink) openSmartLink();
@@ -207,35 +208,50 @@ function openPage(page){
   if(page==='withdraw') updateWithdraw();
 }
 
-function updatePoints(){ userPoints.innerText=localStorage.getItem('points')||'0'; }
-function updateWithdraw(){ withdrawPoints.innerText=localStorage.getItem('points')||'0'; }
+function updatePoints(){ userPoints.innerText = localStorage.getItem('points') || '0'; }
+function updateWithdraw(){ withdrawPoints.innerText = localStorage.getItem('points') || '0'; }
 
 function withdrawCoins(){
-  const wallet=walletAddress.value.trim();
-  const pts=parseInt(localStorage.getItem('points')||'0');
+  const wallet = walletAddress.value.trim();
+  const pts = parseInt(localStorage.getItem('points') || '0', 10);
   if(!wallet) return alert('Enter your wallet');
-  if(pts<50) return alert('Need at least 50 coins to withdraw');
+  if(pts < 50) return alert('Need at least 50 coins to withdraw');
   alert(`Withdrawal request submitted!\nWallet: ${wallet}\nAmount: ${pts} coins`);
   localStorage.setItem('points','0');
   updatePoints(); updateWithdraw();
 }
 
 function changePassword(){
-  const newPass=document.getElementById('newPassword').value.trim();
+  const newPass = document.getElementById('newPassword').value.trim();
   if(!newPass) return alert('Enter a new password');
-  localStorage.setItem('password',newPass);
+  localStorage.setItem('password', newPass);
   alert('Password updated!');
 }
 
 function toggleTheme(){
   document.body.classList.toggle('dark');
-  document.body.style.background=document.body.classList.contains('dark')?'#222':'#f7f7f8';
-  document.body.style.color=document.body.classList.contains('dark')?'#eee':'#333';
+  document.body.style.background = document.body.classList.contains('dark') ? '#222' : '#f7f7f8';
+  document.body.style.color = document.body.classList.contains('dark') ? '#eee' : '#333';
 }
 
-function deleteAccount(){ if(confirm('Delete account?')){ localStorage.clear(); alert('Account deleted'); location.reload(); } }
-function logout(){ mainApp.classList.add('hidden'); loginPage.classList.remove('hidden'); footerNav.style.display='none'; localStorage.removeItem('guest'); }
-function toggleMenu(){ document.querySelector('.nav-items').classList.toggle('hidden'); }
+function deleteAccount(){ 
+  if(confirm('Delete account?')){ 
+    localStorage.clear(); 
+    alert('Account deleted'); 
+    location.reload(); 
+  } 
+}
+
+function logout(){ 
+  mainApp.classList.add('hidden'); 
+  loginPage.classList.remove('hidden'); 
+  footerNav.style.display='none'; 
+  localStorage.removeItem('guest'); 
+}
+
+function toggleMenu(){ 
+  document.querySelector('.nav-items').classList.toggle('hidden'); 
+}
 </script>
 </body>
 </html>
