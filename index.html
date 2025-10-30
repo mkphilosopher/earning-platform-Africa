@@ -118,7 +118,6 @@ a:hover { text-decoration: underline; }
   <button id="footProfile" onclick="openPage('profile')"><i class="fa-solid fa-user"></i>Profile</button>
   <button id="footSettings" onclick="openPage('settings')"><i class="fa-solid fa-gear"></i>Settings</button>
 </div>
-
 <script>
 const loginPage=document.getElementById('loginPage');
 const signupPage=document.getElementById('signupPage');
@@ -161,12 +160,12 @@ function guestLogin(){
 }
 
 function startApp(user){
-  loginPage.classList.add('hidden');
-  signupPage.classList.add('hidden');
-  mainApp.classList.remove('hidden');
-  footerNav.style.display='flex';
-  profileName.innerText = user;
-  profileEmail.innerText = localStorage.getItem('email') || 'Guest';
+  if (loginPage) loginPage.classList.add('hidden'); // Added checks for safety
+  if (signupPage) signupPage.classList.add('hidden'); // Added checks for safety
+  if (mainApp) mainApp.classList.remove('hidden');
+  if (footerNav) footerNav.style.display='flex'; // Check added for safety
+  if (profileName) profileName.innerText = user;
+  if (profileEmail) profileEmail.innerText = localStorage.getItem('email') || 'Guest';
   updatePoints();
   openPage('home'); // ensure home page shows
 }
@@ -175,14 +174,16 @@ function startApp(user){
    Smart Link (SingingFiles)
 --------------------------------*/
 function openSmartLink(){ 
-  window.open("https://singingfiles.com/show.php?l=0&u=2461111&id=70075",_blank");
+  // FIX: Added the missing starting double quote before _blank
+  window.open("https://singingfiles.com/show.php?l=0&u=2461111&id=70075", "_blank"); 
 }
 
 /* -------------------------------
    Points System
 --------------------------------*/
 function addPoints(amount,message,openLink=false){
-  let pts = parseInt(localStorage.getItem('points') || '0', 10);
+  // Ensure we are getting an integer with radix 10
+  let pts = parseInt(localStorage.getItem('points') || '0', 10); 
   pts += amount;
   localStorage.setItem('points', pts);
   alert(`${message} You earned ${amount} coins!`);
@@ -208,10 +209,11 @@ function openPage(page){
   if(page==='withdraw') updateWithdraw();
 }
 
-function updatePoints(){ userPoints.innerText = localStorage.getItem('points') || '0'; }
-function updateWithdraw(){ withdrawPoints.innerText = localStorage.getItem('points') || '0'; }
+function updatePoints(){ if(userPoints) userPoints.innerText = localStorage.getItem('points') || '0'; }
+function updateWithdraw(){ if(withdrawPoints) withdrawPoints.innerText = localStorage.getItem('points') || '0'; }
 
 function withdrawCoins(){
+  if (!walletAddress) return alert('Cannot find wallet address input element.'); // Safety check
   const wallet = walletAddress.value.trim();
   const pts = parseInt(localStorage.getItem('points') || '0', 10);
   if(!wallet) return alert('Enter your wallet');
@@ -243,15 +245,18 @@ function deleteAccount(){
 }
 
 function logout(){ 
-  mainApp.classList.add('hidden'); 
-  loginPage.classList.remove('hidden'); 
-  footerNav.style.display='none'; 
+  if (mainApp) mainApp.classList.add('hidden'); 
+  if (loginPage) loginPage.classList.remove('hidden'); 
+  if (footerNav) footerNav.style.display='none'; 
   localStorage.removeItem('guest'); 
 }
 
 function toggleMenu(){ 
-  document.querySelector('.nav-items').classList.toggle('hidden'); 
+  const navItems = document.querySelector('.nav-items');
+  if (navItems) navItems.classList.toggle('hidden'); 
 }
 </script>
 </body>
 </html>
+
+<script>
